@@ -1,3 +1,3 @@
-import CommentProvider from "./CommentProvider";
+import CommentProvider from './CommentProvider'
 
 export default CommentProvider
