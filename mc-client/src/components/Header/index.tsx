@@ -1,12 +1,8 @@
 import React, {JSX} from 'react'
-import Grid from "@mui/material/Grid"
+import { Typography } from '@mui/material'
 
 export default function Header() : JSX.Element {
     return (
-    <Grid container className='header' justifyContent='center' sx={{padding: '2rem'}}>
-        <Grid item>
-        Jake Barron MC Challenge Submission
-        </Grid>
-    </Grid>
+        <Typography sx={{marginTop: '1rem'}} textAlign='center' variant='h3'>Jake Barron's UI Adventure</Typography>
     )
 }

@@ -33,7 +33,7 @@ class Comment {
   }
 
   getComments() {
-    return this.dataAccessObject.all('SELECT * FROM comments');
+    return this.dataAccessObject.all('SELECT * FROM comments ORDER BY created DESC');
   }
 }
 
