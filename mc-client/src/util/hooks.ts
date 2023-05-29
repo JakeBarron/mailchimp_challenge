@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 
 // Credit Dan Abramov
-export function useInterval(callback: () => {}, delay: number) {
+export function useInterval(callback: () => {}, delay: number | null) {
     const savedCallback = useRef<() => {}>()
 
     useEffect(() => {

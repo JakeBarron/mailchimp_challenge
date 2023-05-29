@@ -11,3 +11,5 @@ export const DAYS_OF_THE_WEEK = [
 ]
 export const GET_COMMENTS_PATH = `${SERVER_URL}/getComments`
 export const CREATE_COMMENT_PATH = `${SERVER_URL}/createComment`
+
+export const POLLING_INTERVAL = 10000

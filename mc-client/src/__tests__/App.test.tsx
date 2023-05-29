@@ -1,8 +1,13 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import App from '../App'
 
-test('renders learn react link', () => {
-    render(<App/>)
-    expect(screen.getByText('Jake Barron\'s UI Adventure')).toBeInTheDocument()
+describe('Test App', () => {
+    test('App renders without crashing', async () => {
+        const { unmount } = render(<App />)
+        //this logic advances useInterval hook straight to tick
+        expect(screen.getByTestId('app')).toBeDefined()
+        await waitFor(() =>  expect(screen.getByTestId('comment-1')).toBeInTheDocument())
+        unmount()
+    })
 })

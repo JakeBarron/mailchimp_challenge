@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { formatDate } from '../../util/transforms'
 import { Comment } from '../../types'
 import Grid from '@mui/material/Grid'
@@ -13,25 +13,42 @@ interface CommentsProps {
     error: Error | undefined
 }
 
+function BoxWrapper({ children }: PropsWithChildren) {
+    return (
+        <Box
+            data-testid={'comments-box'}
+            sx={{
+                width: '100%',
+                height: '60vh',
+                overflowY: 'scroll',
+                borderRadius: '1rem',
+                background: 'lightBlue',
+                padding: '1rem',
+            }}
+        >
+            {children}
+        </Box>
+    )
+}
+
 export default function Comments({ comments, error }: CommentsProps) {
+
+    if(error) {
+        return <BoxWrapper>
+            <Typography sx={{color: 'red'}} variant='h5'>{error.message}</Typography>
+        </BoxWrapper>
+    }
+
     if (!comments) {
         return (
-            <Box
-                sx={{
-                    width: '100%',
-                    height: '60vh',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                }}
-            >
-                <CircularProgress />
-            </Box>
+            <BoxWrapper>
+                <CircularProgress data-testid="comments-loader" />
+            </BoxWrapper>
         )
     }
 
     return (
-        <Box sx={{ width: '100%', height: '60vh', overflowY: 'scroll' }}>
+        <BoxWrapper>
             <Grid
                 container
                 spacing={4}
@@ -41,7 +58,12 @@ export default function Comments({ comments, error }: CommentsProps) {
             >
                 {comments?.map((c: Comment) => {
                     return (
-                        <Grid item xs={8} key={`comment-${c.id}`}>
+                        <Grid
+                            item
+                            data-testid={`comment-${c.id}`}
+                            xs={8}
+                            key={`comment-${c.id}`}
+                        >
                             <Card>
                                 <CardContent>
                                     <Typography
@@ -59,6 +81,6 @@ export default function Comments({ comments, error }: CommentsProps) {
                     )
                 })}
             </Grid>
-        </Box>
+        </BoxWrapper>
     )
 }

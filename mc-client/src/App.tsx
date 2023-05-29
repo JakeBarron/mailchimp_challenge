@@ -6,7 +6,7 @@ import Comments from './components/Comments'
 
 function App() {
     return (
-        <div className="App">
+        <div className="App" data-testid="app">
             <Container maxWidth="md">
                 <Box sx={{ height: '100vh' }}>
                     <Header />

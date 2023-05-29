@@ -4,13 +4,11 @@ import { createComment, getComments } from '../../api'
 import CommentInput from './CommentInput'
 import CommentList from './CommentList'
 import { useInterval } from '../../util/hooks'
+import { POLLING_INTERVAL } from '../../constants'
 
 export default function CommentProvider(): JSX.Element {
     const [comments, setComments] = useState<Comment[] | undefined>(undefined)
     const [error, setError] = useState<Error | undefined>(undefined)
-    useEffect(() => {
-        fetchComments()
-    }, [])
 
     const fetchComments = async () => {
         try {
@@ -18,13 +16,18 @@ export default function CommentProvider(): JSX.Element {
             setComments(response)
         } catch (err) {
             console.error(err)
-            setError(new Error('something went wrong'))
+            setError(new Error('Something went wrong . . .'))
         }
     }
 
-    useInterval(fetchComments, 10000)
+    useEffect(() => {
+        fetchComments()
+    }, [])
 
-    const submitComment = async (
+    useInterval(fetchComments, POLLING_INTERVAL)
+
+    const submitComment = () => {} 
+    async (
         name: string,
         message: string
     ): Promise<any> => {
