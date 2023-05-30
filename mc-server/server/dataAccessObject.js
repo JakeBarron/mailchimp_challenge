@@ -23,7 +23,7 @@ class DataAccessObject {
     return new Promise((resolve, reject) => {
       this.db.run(sql, params, function(error) {
         if (error) {
-          console.log(error)
+          console.error(error)
           this.printError(sql, error);
           reject(error);
         } else {
