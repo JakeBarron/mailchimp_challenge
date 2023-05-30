@@ -2,10 +2,9 @@
 
 ### *About this project:*
 
-    This repo actually holds two projects.  the `mc-server` package is the code sent to me by mailchimp to act as the backend for my application.  It is mostly the way it was sent to me save for a few changes to the cors settings and a minor change to a sql query for the sake of my app, otherwise I didn't change much. The other project, `mc-client`, is entirely written by me (and also by `create-react-app`).
+This repo actually holds two projects.  the `mc-server` package is the code sent to me by mailchimp to act as the backend for my application.  It is mostly the way it was sent to me save for a few changes to the cors settings and a minor change to a sql query for the sake of my app, otherwise I didn't change much. The other project, `mc-client`, is entirely written by me (and also by `create-react-app`).
 
-    Because this repo contains two projects you will need to install two times.  This was necessary because `mc-server` only runs in node12 and I really wanted to create a frontend using all the latest `React` technology, so I used node18 as my environment. Normally I would have split these into 2 repos, but for the sake of ease of downloading and sharing, I combined them.
-
+Because this repo contains two projects you will need to install two times.  This was necessary because `mc-server` only runs in node12 and I really wanted to create a frontend using all the latest `React` technology, so I used node18 as my environment. Normally I would have split these into 2 repos, but for the sake of ease of downloading and sharing, I combined them.
 
 ### Install
 
