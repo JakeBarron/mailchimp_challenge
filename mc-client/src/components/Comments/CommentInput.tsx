@@ -7,9 +7,14 @@ interface CommentInputProps {
     submitComment: (name: string, message: string) => void
 }
 
+/* 
+a tiny optimization for this component would to be to make it pure.  It meets all the qualifications I just didn't have the time for that type of gold plating.  the optimization gains from this change would 
+be unnoticeable at this scale
+*/
 export default function CommentInput({
     submitComment,
 }: CommentInputProps): JSX.Element {
+    // I decided on controlled input for this very simple form in lieu of of relying on a form to manage state
     const [name, setName] = useState('')
     const [message, setMessage] = useState('')
 

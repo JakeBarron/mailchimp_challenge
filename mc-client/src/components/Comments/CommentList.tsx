@@ -19,6 +19,7 @@ interface CommentsProps {
     error: Error | undefined
 }
 
+// a scrollable component to wrap around the comments list to allow for scroll on new message feature
 const BoxWrapper = forwardRef(
     ({ children }: PropsWithChildren, ref: ForwardedRef<unknown>) => {
         return (
@@ -40,8 +41,16 @@ const BoxWrapper = forwardRef(
     }
 )
 
+/* 
+a tiny optimization for this component would to be to make it pure.  It meets all the qualifications I just didn't have the time for that type of gold plating.  the optimization gains from this change would 
+be unnoticeable at this scale
+*/
 export default function Comments({ comments, error }: CommentsProps) {
     const scrollableRef = useRef<HTMLDivElement>(null)
+    /** when comments are updated, scroll to bottom of scroll box to show new comment
+    In future iterations for a better ux I would show a notification or banner that let the user
+    choose to scroll down rather than being forced
+    */
     useEffect(() => {
         if (scrollableRef.current) {
             scrollableRef.current.scroll({
