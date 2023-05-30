@@ -7,11 +7,11 @@ import { useInterval } from '../../util/hooks'
 import { POLLING_INTERVAL } from '../../constants'
 
 class ValidationError extends Error {
-    constructor(message : string) {
-      super(message); // (1)
-      this.name = "ValidationError"; // (2)
+    constructor(message: string) {
+        super(message) // (1)
+        this.name = 'ValidationError' // (2)
     }
-  }
+}
 
 export default function CommentProvider(): JSX.Element {
     const [comments, setComments] = useState<Comment[] | undefined>(undefined)
@@ -49,7 +49,7 @@ export default function CommentProvider(): JSX.Element {
         } catch (err) {
             if (err instanceof ValidationError) {
                 window.alert(err.message)
-            } else if(err instanceof Error)  {
+            } else if (err instanceof Error) {
                 setError(err)
             }
         }

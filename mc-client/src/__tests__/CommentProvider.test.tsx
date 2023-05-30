@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-    render,
-    waitFor,
-    screen,
-    cleanup
-} from '@testing-library/react'
+import { render, waitFor, screen, cleanup } from '@testing-library/react'
 import { POLLING_INTERVAL } from '../constants'
 import { rest } from 'msw'
 import { server } from '../mocks/server'
@@ -82,8 +77,8 @@ describe('Test polling', () => {
                 }
             )
         )
-         render(<CommentProvider />)
-        await waitFor(() =>{
+        render(<CommentProvider />)
+        await waitFor(() => {
             // we expect that comment-1 should be in the document
             expect(screen.getByTestId('comment-1')).toBeInTheDocument()
             //TODO: fix this test. Should pass in current build

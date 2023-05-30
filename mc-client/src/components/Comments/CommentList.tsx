@@ -1,4 +1,10 @@
-import React, { forwardRef, ForwardedRef, PropsWithChildren, useEffect, useRef } from 'react'
+import React, {
+    forwardRef,
+    ForwardedRef,
+    PropsWithChildren,
+    useEffect,
+    useRef,
+} from 'react'
 import { formatDate } from '../../util/transforms'
 import { Comment } from '../../types'
 import Grid from '@mui/material/Grid'
@@ -13,29 +19,31 @@ interface CommentsProps {
     error: Error | undefined
 }
 
-const BoxWrapper = forwardRef(({ children }: PropsWithChildren, ref : ForwardedRef<unknown>) => {
-    return (
-        <Box
-            ref={ref}
-            data-testid={'comments-box'}
-            sx={{
-                width: '100%',
-                height: '60vh',
-                overflowY: 'scroll',
-                borderRadius: '1rem',
-                background: 'lightBlue',
-                padding: '1rem',
-            }}
-        >
-            {children}
-        </Box>
-    )
-})
+const BoxWrapper = forwardRef(
+    ({ children }: PropsWithChildren, ref: ForwardedRef<unknown>) => {
+        return (
+            <Box
+                ref={ref}
+                data-testid={'comments-box'}
+                sx={{
+                    width: '100%',
+                    height: '60vh',
+                    overflowY: 'scroll',
+                    borderRadius: '1rem',
+                    background: 'lightBlue',
+                    padding: '1rem',
+                }}
+            >
+                {children}
+            </Box>
+        )
+    }
+)
 
 export default function Comments({ comments, error }: CommentsProps) {
     const scrollableRef = useRef<HTMLDivElement>(null)
     useEffect(() => {
-        if(scrollableRef.current) {
+        if (scrollableRef.current) {
             scrollableRef.current.scroll({
                 top: scrollableRef.current.scrollHeight,
                 behavior: 'smooth',

@@ -3,19 +3,19 @@ import { render, screen, cleanup } from '@testing-library/react'
 import CommentsList from '../components/Comments/CommentList'
 import { Comment } from '../types'
 
-const happyPath : Comment[] = [
+const happyPath: Comment[] = [
     {
         id: 1,
         name: 'foo',
         message: 'bar',
-        created: '2023-05-29T00:12:00.000Z'
-    }, 
+        created: '2023-05-29T00:12:00.000Z',
+    },
     {
         id: 2,
         name: 'test',
         message: 'test message',
-        created: '2023-05-29T00:12:00.000Z'
-    }
+        created: '2023-05-29T00:12:00.000Z',
+    },
 ]
 
 afterEach(cleanup)
@@ -36,8 +36,13 @@ describe('Test CommentList', () => {
         expect(screen.getByTestId('comments-loader')).toBeInTheDocument()
     })
     test('List should render error message if there is an error', () => {
-        const errorMessage = "test error message 12345"
-        render(<CommentsList comments={undefined} error={new Error(errorMessage)} />)
+        const errorMessage = 'test error message 12345'
+        render(
+            <CommentsList
+                comments={undefined}
+                error={new Error(errorMessage)}
+            />
+        )
         expect(screen.getByText(errorMessage)).toBeInTheDocument()
     })
 })

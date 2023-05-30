@@ -9,7 +9,7 @@ afterEach(cleanup)
 
 describe('Test CommentInput', () => {
     test('Input should handle change for typing into name field', () => {
-        render(<CommentInput submitComment={ () => {}} />)
+        render(<CommentInput submitComment={() => {}} />)
         const nameText = 'test'
         const nameInput = screen.getByLabelText('Name')
         act(() => {
@@ -18,7 +18,7 @@ describe('Test CommentInput', () => {
         expect(nameInput).toHaveValue(nameText)
     })
     test('Input should handle change for typing into comment field', () => {
-        render(<CommentInput submitComment={ () => {}} />)
+        render(<CommentInput submitComment={() => {}} />)
         const commentText = 'test'
         const commentInput = screen.getByLabelText('Comment')
         act(() => {

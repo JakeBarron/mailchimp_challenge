@@ -3,13 +3,13 @@ import { Comment } from '../types'
 export async function getComments(): Promise<Comment[]> {
     const url = `${process.env.REACT_APP_API_URL}/getComments`
     const response = await fetch(url, {
-        method: 'GET'
+        method: 'GET',
     })
     const data = await response.json()
     if (response.ok) {
         return data
     } else {
-        //better error message here
+        // Catch and handle different server errors diferently here
         return Promise.reject(new Error('Something went wrong . . .'))
     }
 }
@@ -35,6 +35,7 @@ export async function createComment(
     if (response.ok) {
         return data
     } else {
+        // Catch and handle different server errors diferently here
         return Promise.reject(new Error('Something went wrong . . .'))
     }
 }

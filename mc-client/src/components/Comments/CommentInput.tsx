@@ -48,7 +48,12 @@ export default function CommentInput({
                 />
             </Grid>
             <Grid item>
-                <Button id="submit-button" data-testid="submit-button" onClick={onSubmit} variant="contained">
+                <Button
+                    id="submit-button"
+                    data-testid="submit-button"
+                    onClick={onSubmit}
+                    variant="contained"
+                >
                     Comment
                 </Button>
             </Grid>

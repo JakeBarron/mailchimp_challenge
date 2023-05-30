@@ -7,7 +7,9 @@ describe('Test App', () => {
         const { unmount } = render(<App />)
         //this logic advances useInterval hook straight to tick
         expect(screen.getByTestId('app')).toBeDefined()
-        await waitFor(() =>  expect(screen.getByTestId('comment-1')).toBeInTheDocument())
+        await waitFor(() =>
+            expect(screen.getByTestId('comment-1')).toBeInTheDocument()
+        )
         unmount()
     })
 })
