@@ -1,4 +1,4 @@
-import React, { JSX, useEffect, useState } from 'react'
+import React, { JSX, useEffect, useState, useCallback } from 'react'
 import { Comment } from '../../types'
 import { createComment, getComments } from '../../api'
 import CommentInput from './CommentInput'
@@ -6,28 +6,35 @@ import CommentList from './CommentList'
 import { useInterval } from '../../util/hooks'
 import { POLLING_INTERVAL } from '../../constants'
 
+class ValidationError extends Error {
+    constructor(message : string) {
+      super(message); // (1)
+      this.name = "ValidationError"; // (2)
+    }
+  }
+
 export default function CommentProvider(): JSX.Element {
     const [comments, setComments] = useState<Comment[] | undefined>(undefined)
     const [error, setError] = useState<Error | undefined>(undefined)
 
-    const fetchComments = async () => {
+    const fetchComments = useCallback(async () => {
         try {
             const response = await getComments()
-            setComments(response)
+            if (response?.length !== comments?.length) {
+                setComments(response)
+            }
         } catch (err) {
-            console.error(err)
             setError(new Error('Something went wrong . . .'))
         }
-    }
+    }, [comments])
 
     useEffect(() => {
         fetchComments()
-    }, [])
+    }, [fetchComments])
 
     useInterval(fetchComments, POLLING_INTERVAL)
 
-    const submitComment = () => {} 
-    async (
+    const submitComment = async (
         name: string,
         message: string
     ): Promise<any> => {
@@ -40,22 +47,23 @@ export default function CommentProvider(): JSX.Element {
                 fetchComments()
             }
         } catch (err) {
-            if (err instanceof Error) {
-                setError(err)
+            if (err instanceof ValidationError) {
                 window.alert(err.message)
+            } else if(err instanceof Error)  {
+                setError(err)
             }
         }
     }
 
     const validateName = (name: string) => {
         if (name.length === 0) {
-            throw new Error('Name cannot be blank')
+            throw new ValidationError('Name cannot be blank')
         }
     }
 
     const validateMessage = (message: string) => {
         if (message.length === 0) {
-            throw new Error('Message cannot be blank')
+            throw new ValidationError('Message cannot be blank')
         }
     }
 

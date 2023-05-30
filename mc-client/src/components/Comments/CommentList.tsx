@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, { forwardRef, ForwardedRef, PropsWithChildren, useEffect, useRef } from 'react'
 import { formatDate } from '../../util/transforms'
 import { Comment } from '../../types'
 import Grid from '@mui/material/Grid'
@@ -13,9 +13,10 @@ interface CommentsProps {
     error: Error | undefined
 }
 
-function BoxWrapper({ children }: PropsWithChildren) {
+const BoxWrapper = forwardRef(({ children }: PropsWithChildren, ref : ForwardedRef<unknown>) => {
     return (
         <Box
+            ref={ref}
             data-testid={'comments-box'}
             sx={{
                 width: '100%',
@@ -29,14 +30,31 @@ function BoxWrapper({ children }: PropsWithChildren) {
             {children}
         </Box>
     )
-}
+})
 
 export default function Comments({ comments, error }: CommentsProps) {
-
-    if(error) {
-        return <BoxWrapper>
-            <Typography sx={{color: 'red'}} variant='h5'>{error.message}</Typography>
-        </BoxWrapper>
+    const scrollableRef = useRef<HTMLDivElement>(null)
+    useEffect(() => {
+        if(scrollableRef.current) {
+            scrollableRef.current.scroll({
+                top: scrollableRef.current.scrollHeight,
+                behavior: 'smooth',
+            })
+        }
+    }, [comments])
+    if (error) {
+        return (
+            <BoxWrapper>
+                <Typography
+                    data-testid={'comment-list-error-message'}
+                    id={'comment-list-error-message'}
+                    sx={{ color: 'red' }}
+                    variant="h5"
+                >
+                    {error.message}
+                </Typography>
+            </BoxWrapper>
+        )
     }
 
     if (!comments) {
@@ -48,7 +66,7 @@ export default function Comments({ comments, error }: CommentsProps) {
     }
 
     return (
-        <BoxWrapper>
+        <BoxWrapper ref={scrollableRef}>
             <Grid
                 container
                 spacing={4}
