@@ -23,7 +23,7 @@ Because this repo contains two projects you will need to install two times.  Thi
 to run either of these apps change into their respective directories (where their package.json file is located). 
 - For mc-server run `nvm use 12` then `npm start`
 - For mc-client
-    - add a `.env` file at root with the base path of the mc-server and port
+    - add a `.env` file at root or mc-client with the base path of the mc-server and port
         - only required var is `REACT_APP_API_URL=<serverBasePath:port>`
         - default is `http://localhost:3001`
     - run `nvm use 18` then `npm start`
